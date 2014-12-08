@@ -1,5 +1,4 @@
 venus
 =====
-Venus:
-    apps vetical search
+demo apps vetical search.
 
