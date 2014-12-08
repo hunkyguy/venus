@@ -1,0 +1,58 @@
+v0.0.1
+    Step of building the Demo:
+    1. Word2vec: 
+        ## penny news corpus: part_penny.aa, size: 200, window: 10, model: partaa_s200w10.bin.
+        ## ==> zsimilar.txt:
+            the 15 most similar words of each word, using gensim load the model.
+            Format:
+                {w1: [(sw11, cos11), (sw12, cos21)...], w2: [(sw21, cos21), (sw22, cos22), ...], ...}
+            cos is used for RANK. 
+
+    2. Docs set:
+        ## 69k+ baidu apps.
+        JSON file.
+    
+    3. Textrank:
+        base on <<TextRank: Bringing Order into Texts>>
+
+    4. Index:
+        exctract key words from the brief of doc, building index.
+        Format:
+            each doc: {'docid': docid, 'terms': [kw1, kw2, kw3, ...]}
+
+    5. Invert Index:
+        Format:
+            {kw1: {docid1: weight1, docid2: weight2, ...}, kw2: {docidX: weightX, docidY: weightY, ...}}
+
+    6. Extend QuerySet:
+        get the nearest words from word2vec of each word in raw query set.
+
+    7. Rank:
+        score1: sum of scores of words that in raw query set.
+        score2: sum of scores of words that in extend query set, but not in raw query set.
+        discount score2 at 1/n.
+        Example:
+            scoreResult[docid] = result[docid]['score2'] / result[docid]['n'] + result[docid]['score1']
+
+    8. Search:
+        Input:
+            query string. 
+            ==> cut to words; and extend the query set(option).
+
+        Output:
+            sortedResult: sort result by score, list of (docid, score).
+            extendQuerySet: extend query set, if not extend, same as rawQueryset.
+            rawQueryset: raw query set, cut from query string.
+            query_time: time cost for query.
+    
+    9. Display:
+        Get the doc detail from Docs(step 2).
+
+v0.0.2
+    Reconstruct.
+
+    Invert Index:
+        Attempt to modify the weight of doc with tfidf, see branch dev002, dev002_tf.
+        But abandon.
+
+

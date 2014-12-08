@@ -1,0 +1,27 @@
+$def with (result, index_cost, delta_query, delta_detail, delta_show)
+<p>results: $len(result), got index costs: $index_cost, query costs: $delta_query, details costs: $delta_detail, total costs: $delta_show</p>
+<h4><b>Show details:</b></h4>
+$for item in result[:80]:
+    <div>
+        <table border="1" style="width:100%">
+            <tr>
+                <td style="color:#0000ff;width:10%"><b>Score:</b></td>
+                <td style="color:#f75000;width:85%"><b>$item[0]</b></td>
+            </tr>
+            </tr>
+
+            <tr>
+            <td style="color:#0000ff"><b>Detail:</b></td>
+            <td>$:item[1]</td>
+            </tr>
+
+            <tr>
+            <td style="color:#0000ff" valign="top"><b>Brief:</b></td>
+            <td>
+                <p>$:item[2]</p>
+            </td>
+            </tr>
+        </table>
+    </div>
+    <br/>
+
